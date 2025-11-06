@@ -74,15 +74,15 @@ group = "com.example.kmp.myapplication"
 version = System.getenv("kuiklyBizVersion") ?: "1.0.0"
 
 publishing {
-    repositories {
-        maven {
-            credentials {
-                username = System.getenv("mavenUserName") ?: ""
-                password = System.getenv("mavenPassword") ?: ""
-            }
-            url = uri(rootProject.properties["mavenUrl"] as? String ?: "")
-        }
-    }
+//    repositories {
+//        maven {
+//            credentials {
+//                username = System.getenv("mavenUserName") ?: ""
+//                password = System.getenv("mavenPassword") ?: ""
+//            }
+//            url = uri(rootProject.properties["mavenUrl"] as? String ?: "")
+//        }
+//    }
 }
 
 ksp {

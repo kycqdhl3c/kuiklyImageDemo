@@ -17,12 +17,14 @@ struct Index {
     const params = router.getParams() as Record<string, Object>;
     this.pageName = params?.pageName as string;
     this.pageData = params?.pageData as KRRecord;
+
+    console.log(">>>>>>>>>>>")
   }
 
   build() {
     Stack() {
       Kuikly({
-        pagerName: this.pageName ?? 'router',
+        pagerName: 'router',
         pagerData: this.pageData ?? {},
         delegate: this.kuiklyViewDelegate,
         nativeManager: globalNativeManager,

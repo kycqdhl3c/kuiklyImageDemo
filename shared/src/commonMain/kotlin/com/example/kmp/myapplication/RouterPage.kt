@@ -11,7 +11,9 @@ import com.tencent.kuikly.core.views.*
 import com.tencent.kuikly.core.views.compose.Button
 import com.tencent.kuikly.core.reactive.handler.*
 import com.example.kmp.myapplication.base.BasePager
+import com.example.kmp.myapplication.base.BridgeModule
 import com.example.kmp.myapplication.base.bridgeModule
+import com.example.kmp.myapplication.widget.HBKEmojiText
 import com.tencent.kuikly.core.base.attr.ImageUri
 
 @Page("router", supportInLocal = true)
@@ -27,22 +29,14 @@ internal class RouterPage : BasePager() {
                 backgroundColor(Color.WHITE)
                 padding(100F)
             }
-            Image {
+            Text {
                 attr {
-                    resizeStretch()
-                    src(ImageUri.commonAssets("x3.png"))
-                    width(200f)
-                    height(17f)
-                    capInsets(0F, 20F, 0F, 55F)
+                    text("测试内容1")
                 }
             }
-            Image {
+            HBKEmojiText {
                 attr {
-                    resizeStretch()
-                    src(ImageUri.commonAssets("x1.png"))
-                    width(200f)
-                    height(17f)
-                    capInsets(0F, 6F, 0F, 19F)
+                    text("测试内容2")
                 }
             }
         }
@@ -51,6 +45,7 @@ internal class RouterPage : BasePager() {
 
     override fun created() {
         super.created()
+        acquireModule<BridgeModule>(BridgeModule.MODULE_NAME).log(">>>>>>>>>>>> 测试")
     }
 
     override fun viewDidLoad() {
@@ -87,77 +82,4 @@ internal class RouterPage : BasePager() {
         private const val AAR_MODE_TIP = "如：router 或者 router&key=value （&后面为页面参数）"
     }
 
-}
-
-internal class RouterNavigationBar : ComposeView<RouterNavigationBarAttr, ComposeEvent>() {
-    override fun createEvent(): ComposeEvent {
-        return ComposeEvent()
-    }
-
-    override fun createAttr(): RouterNavigationBarAttr {
-        return RouterNavigationBarAttr()
-    }
-
-    override fun body(): ViewBuilder {
-        val ctx = this
-        return {
-            View {
-                attr {
-                    paddingTop(ctx.pagerData.statusBarHeight)
-                    backgroundColor(Color.WHITE)
-                }
-                // nav bar
-                View {
-                    attr {
-                        height(44f)
-                        allCenter()
-                    }
-
-                    Text {
-                        attr {
-                            text(ctx.attr.title)
-                            fontSize(17f)
-                            fontWeightSemisolid()
-                            backgroundLinearGradient(Direction.TO_BOTTOM,
-                                ColorStop(Color(0xFF23D3FD), 0f),
-                                ColorStop(Color(0xFFAD37FE), 1f))
-
-                        }
-                    }
-
-                }
-
-                vif({ !ctx.attr.backDisable }) {
-                    Image {
-                        attr {
-                            absolutePosition(
-                                top = 12f + getPager().pageData.statusBarHeight,
-                                left = 12f,
-                                bottom = 12f,
-                                right = 12f
-                            )
-                            size(10f, 17f)
-                            src("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAASBAMAAAB/WzlGAAAAElBMVEUAAAAAAAAAAAAAAAAAAAAAAADgKxmiAAAABXRSTlMAIN/PELVZAGcAAAAkSURBVAjXYwABQTDJqCQAooSCHUAcVROCHBiFECTMhVoEtRYA6UMHzQlOjQIAAAAASUVORK5CYII=")
-                        }
-                        event {
-                            click {
-                                getPager().acquireModule<RouterModule>(RouterModule.MODULE_NAME)
-                                    .closePage()
-                            }
-                        }
-                    }
-                }
-
-            }
-        }
-    }
-}
-
-internal class RouterNavigationBarAttr : ComposeAttr() {
-    var title: String by observable("")
-    var backDisable = false
-}
-
-internal fun ViewContainer<*, *>.RouterNavBar(init: RouterNavigationBar.() -> Unit) {
-    addChild(RouterNavigationBar(), init)
 }
