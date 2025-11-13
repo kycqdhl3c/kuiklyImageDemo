@@ -30,10 +30,11 @@ export class HBKEmojiTextView extends KuiklyRenderBaseView {
 @Builder
 function createEmojiTextView(view: KuiklyRenderBaseView) {
   Text((view as HBKEmojiTextView).content)
+    .backgroundColor(Color.Red)
     .onSizeChange((oldSize, newSize) => {
-      console.log(`onAreaChange oldSize: ${oldSize.width}-${oldSize.height}, newSize: ${newSize.width}-${newSize.height}`)
+      console.log(`>>>> onSizeChange oldSize: ${oldSize.width}-${oldSize.height}, newSize: ${newSize.width}-${newSize.height}`)
     })
     .onAreaChange((oldSize, newSize) => {
-      console.log(`onAreaChange oldSize: ${oldSize.width}-${oldSize.height}, newSize: ${newSize.width}-${newSize.height}`)
+      console.log(`>>>> onAreaChange oldSize: ${oldSize.width}-${oldSize.height}, newSize: ${newSize.width}-${newSize.height}`)
     })
 }

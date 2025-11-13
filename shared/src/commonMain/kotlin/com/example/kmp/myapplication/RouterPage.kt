@@ -36,7 +36,8 @@ internal class RouterPage : BasePager() {
             }
             HBKEmojiText {
                 attr {
-                    text("测试内容2")
+                    minHeight(1f)
+                    text("测试内容2测试内容2测试内容2测试内容2测试内容2测试内容2测试内容2测试内容2测试内容2测试内容2")
                 }
             }
         }
