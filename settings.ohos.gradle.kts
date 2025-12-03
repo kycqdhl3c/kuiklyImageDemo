@@ -7,6 +7,7 @@ pluginManagement {
         maven {
             url = uri("https://mirrors.tencent.com/nexus/repository/maven-public/")
         }
+        maven("https://mirrors.tencent.com/nexus/repository/maven-tencent/")
     }
 }
 
@@ -18,6 +19,7 @@ dependencyResolutionManagement {
         maven {
             url = uri("https://mirrors.tencent.com/nexus/repository/maven-public/")
         }
+        maven("https://mirrors.tencent.com/nexus/repository/maven-tencent/")
     }
 }
 

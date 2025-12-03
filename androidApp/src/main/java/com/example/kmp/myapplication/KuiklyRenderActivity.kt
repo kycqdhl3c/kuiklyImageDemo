@@ -128,7 +128,7 @@ class KuiklyRenderActivity : AppCompatActivity(), KuiklyRenderViewBaseDelegatorD
 
         private fun initKuiklyAdapter() {
             with(KuiklyRenderAdapterManager) {
-                krImageAdapter = KRImageAdapter
+//                krImageAdapter = KRImageAdapter
                 krLogAdapter = KRLogAdapter
                 krUncaughtExceptionHandlerAdapter = KRUncaughtExceptionHandlerAdapter
                 krFontAdapter = KRFontAdapter

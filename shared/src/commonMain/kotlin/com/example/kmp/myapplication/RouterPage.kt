@@ -1,43 +1,73 @@
 package com.example.kmp.myapplication
 
+import com.example.kmp.myapplication.base.BasePager
+import com.example.kmp.myapplication.base.BridgeModule
 import com.tencent.kuikly.core.annotations.Page
-import com.tencent.kuikly.core.base.*
+import com.tencent.kuikly.core.base.Color
+import com.tencent.kuikly.core.base.ViewBuilder
+import com.tencent.kuikly.core.base.ViewRef
+import com.tencent.kuikly.core.directives.vforIndex
 import com.tencent.kuikly.core.directives.vif
 import com.tencent.kuikly.core.module.RouterModule
 import com.tencent.kuikly.core.module.SharedPreferencesModule
 import com.tencent.kuikly.core.nvi.serialization.json.JSONObject
+import com.tencent.kuikly.core.reactive.handler.observableList
 import com.tencent.kuikly.core.utils.urlParams
-import com.tencent.kuikly.core.views.*
-import com.tencent.kuikly.core.views.compose.Button
-import com.tencent.kuikly.core.reactive.handler.*
-import com.example.kmp.myapplication.base.BasePager
-import com.example.kmp.myapplication.base.BridgeModule
-import com.example.kmp.myapplication.base.bridgeModule
-import com.example.kmp.myapplication.widget.HBKEmojiText
-import com.tencent.kuikly.core.base.attr.ImageUri
+import com.tencent.kuikly.core.views.InputView
+import com.tencent.kuikly.core.views.List
+import com.tencent.kuikly.core.views.Text
+import com.tencent.kuikly.core.views.View
 
 @Page("router", supportInLocal = true)
 internal class RouterPage : BasePager() {
 
     var inputText: String = ""
     lateinit var inputRef: ViewRef<InputView>
+    val testViewModel: TestViewModel  by lazy { TestViewModel(pagerId) }
 
     override fun body(): ViewBuilder {
         val ctx = this
         return {
             attr {
                 backgroundColor(Color.WHITE)
-                padding(100F)
             }
-            Text {
+            List {
                 attr {
-                    text("测试内容1")
+                    width(ctx.pagerData.pageViewWidth)
+                    height(ctx.pagerData.pageViewHeight)
                 }
-            }
-            HBKEmojiText {
-                attr {
-                    minHeight(1f)
-                    text("测试内容2测试内容2测试内容2测试内容2测试内容2测试内容2测试内容2测试内容2测试内容2测试内容2")
+
+                vforIndex({ ctx.testViewModel.list }) { item, index, count ->
+                    View {
+                        acquireModule<BridgeModule>(BridgeModule.MODULE_NAME).log(">>>>>>>>>>>> vforIndex index=$index size=${ctx.testViewModel.list.size} count=${count}")
+                        attr {
+                            width(ctx.pagerData.pageViewWidth)
+                            height(200F)
+                        }
+
+                        Text {
+                            attr {
+                                text(item.index)
+                                fontSize(24F)
+                            }
+                            event {
+                                click {
+                                    ctx.testViewModel.deleteItem(item)
+                                }
+                            }
+                        }
+
+                        vif({
+                            acquireModule<BridgeModule>(BridgeModule.MODULE_NAME).log(">>>>>>>>>>>> vif index=$index size=${ctx.testViewModel.list.size} count=${count}")
+                            index + 1< ctx.testViewModel.list.size
+                        }) {
+                            Text {
+                                attr {
+                                    text("内容")
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

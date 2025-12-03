@@ -1,7 +1,7 @@
 object Version {
 
-    private const val KUIKLY_VERSION = "2.1.1"
-    private const val KOTLIN_VERSION = "2.0.21"
+    private const val KUIKLY_VERSION = "2.8.0"
+    private const val KOTLIN_VERSION = "1.9.22"
     private const val KOTLIN_OHOS_VERSION = "2.0.21-ohos"
 
     /**

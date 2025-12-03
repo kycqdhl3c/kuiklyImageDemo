@@ -1,1 +1,7 @@
-[]
+[
+  {
+    "moduleId": "com.tencent.kuikly-open:core:2.8.0-1.9.22",
+    "file": "/Users/xuchongsheng/kuiklyImageDemo/.kotlin/metadata/kotlinTransformedCInteropMetadataLibraries/com.tencent.kuikly-open-core-2.8.0-1.9.22-iosMain-cinterop/com.tencent.kuikly-open_core-cinterop-kuikly-zbSeiA.klib",
+    "sourceSetName": "iosMain"
+  }
+]
